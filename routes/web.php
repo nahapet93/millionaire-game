@@ -14,11 +14,18 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::post('/questions/store', 'QuestionController@store')->name('questions_store');
-Route::get('/questions/edit/{id}', 'QuestionController@edit')->name('questions_edit');
-Route::put('/questions/update/{id}', 'QuestionController@update')->name('questions_update');
-Route::delete('/questions/destroy/{id}', 'QuestionController@destroy')->name('questions_destroy');
-
 Route::get('/games/top', 'GameController@top')->name('games_top');
-Route::post('/games/store', 'GameController@store')->name('games_store');
-Route::post('/games/answer', 'GameController@answer')->name('games_answer');
+
+Route::group(['middleware' => 'admin'], function()
+{
+    Route::post('/questions/store', 'QuestionController@store')->name('questions_store');
+    Route::get('/questions/edit/{id}', 'QuestionController@edit')->name('questions_edit');
+    Route::put('/questions/update/{id}', 'QuestionController@update')->name('questions_update');
+    Route::delete('/questions/destroy/{id}', 'QuestionController@destroy')->name('questions_destroy');
+});
+
+Route::group(['middleware' => 'player'], function()
+{
+    Route::post('/games/store', 'GameController@store')->name('games_store');
+    Route::post('/games/answer', 'GameController@answer')->name('games_answer');
+});
