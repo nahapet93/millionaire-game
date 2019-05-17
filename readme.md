@@ -5,6 +5,7 @@
 - Run `composer install`
 - Run `php artisan migrate`
 - Run `php artisan db:seed` (to create an admin user)
+- Run `php artisan key:generate`
 - Run `php artisan serve` (or make a virtual host and run with apache)
 
 Admin login and password are `admin@gmail.com` / `admin123`
