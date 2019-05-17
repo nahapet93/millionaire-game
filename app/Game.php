@@ -113,6 +113,10 @@ class Game extends Eloquent
     }
 
     public static function getTopGames($limit) {
-	    return Game::select('*', DB::raw('max(score) as ms'))->groupBy('user_id')->orderBy('ms', 'desc')->limit($limit)->get();
+	    return Game::select('*', DB::raw('max(score) as ms'))
+            ->where('score', '!=', 0)
+            ->groupBy('user_id')
+            ->orderBy('ms', 'desc')
+            ->limit($limit)->get();
     }
 }

@@ -8,7 +8,7 @@
                     <div class="card-header">Dashboard</div>
 
                     <div class="card-body text-center">
-                        @if (!empty($top_games))
+                        @if (count($top_games) > 0)
                             <h2>Top scores:</h2>
                             @foreach ($top_games as $top_game)
                                 <hr />
